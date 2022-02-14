@@ -11,8 +11,8 @@ import {
   sendToEpsilon,
   getColumnNamesForChecklist,
 } from '../../utilities/segmentationOperations';
-import useSnackbar from 'app/components/useSnackbar';
-import history from 'history.js';
+import useSnackbar from 'src/ea_oyster_components/components/useSnackbar';
+import history from 'src/ea_oyster_components/history';
 import useSegmentClone from '../useSegmentClone';
 import SegmentHeader from '../segmentHeader';
 import Dialog from '@material-ui/core/Dialog';
@@ -26,7 +26,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import List from '@material-ui/core/List';
 import { RegularColumnList, RebidColumnList } from './ExportColumnList';
 import JWTAuthContext from 'src/ea_oyster_components/contexts/JWTAuthContext';
-import { MatxLoading } from 'matx';
+import { MatxLoading } from 'src/ea_oyster_components/matx';
 
 /**
  * JSX component - Segmentation details screen. Holds the segment header, right panel
@@ -192,6 +192,8 @@ const SegmentationDetails = ({ match }) => {
   //     setIsCheck([]);
   //   }
   // };
+
+  console.log('Hello From Details');
 
   return (
     <React.Fragment>

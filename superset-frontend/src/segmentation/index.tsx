@@ -18,15 +18,26 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SegementationLanding from './components/segmentation-landing/SegmentationLanding';
-
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import ErrorBoundary from 'src/components/ErrorBoundary';
+import ToastContainer from 'src/components/MessageToasts/ToastContainer';
+import dashboardRoutes from './segmentationRoutes';
+import SegementationLanding from './components/segmentation-landing/SegmentationLanding';
 
 export const App = () => {
   const [count, setCount] = React.useState(0);
   return (
     <BrowserRouter>
       <SegementationLanding />
+      <Switch>
+        {dashboardRoutes.map(({ path, Component }) => (
+          <Route path={path} key={path}>
+            <ErrorBoundary>
+              <Component {...props} />
+            </ErrorBoundary>
+          </Route>
+        ))}
+      </Switch>
     </BrowserRouter>
   );
 };
