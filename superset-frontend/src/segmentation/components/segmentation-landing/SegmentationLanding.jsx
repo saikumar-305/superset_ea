@@ -11,14 +11,17 @@ import {
 } from '../../context/FilterContext';
 import useSnackbar from 'src/ea_oyster_components/components/useSnackbar';
 import ErrorBoundary from 'src/components/ErrorBoundary';
-import history from 'src/ea_oyster_components/history.js';
+// import history from 'src/ea_oyster_components/history.js';
 import useSegmentDelete from '../useSegmentDelete';
 import useSegmentClone from '../useSegmentClone';
 import API_PATHS from 'src/ea_oyster_components/constants/apiPaths';
 import C1ListPanel from 'src/ea_oyster_components/c1component/C1ListPanel';
 import axios from 'src/ea_oyster_components/axios';
+import { useHistory } from 'react-router-dom';
 
 const SegmentationLanding = () => {
+  const history = useHistory();
+  console.log(history);
   const { modifySegmentDetails } = useContext(FilterContext);
 
   let [selectedRows, setSelectedRows] = useState([]);
@@ -145,7 +148,7 @@ const SegmentationLanding = () => {
     isShowViewColumns: true,
     isShowFilter: true,
     isShowAdd: {
-      path: '/segmentation/create',
+      path: '/create',
     },
   };
 
@@ -169,19 +172,6 @@ const SegmentationLanding = () => {
     return selectedRows;
   };
   console.log('Inside Landing Page');
-
-  const columns2 = ['Name', 'Company', 'City', 'State'];
-
-  const data = [
-    ['Joe James', 'Test Corp', 'Yonkers', 'NY'],
-    ['John Walsh', 'Test Corp', 'Hartford', 'CT'],
-    ['Bob Herm', 'Test Corp', 'Tampa', 'FL'],
-    ['James Houston', 'Test Corp', 'Dallas', 'TX'],
-  ];
-
-  const options = {
-    filterType: 'checkbox',
-  };
 
   return (
     <C1ListPanel routeSegments={[{ name: 'Segmentation List' }]}>
@@ -227,7 +217,7 @@ const SegmentationLanding = () => {
                     Add to Venn Diagram
                   </Button>
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                   <Button
                     variant="contained"
                     disableElevation
@@ -237,11 +227,10 @@ const SegmentationLanding = () => {
                   >
                     Create New Segment
                   </Button>
-                </Grid>
+                </Grid> */}
               </Grid>
             </div>
           </Container>
-          {/* <C1DataTable /> */}
           <C1DataTable
             showToolbarOptions={showToolbarOptions}
             storageKey="customer-segmentation"
@@ -253,11 +242,7 @@ const SegmentationLanding = () => {
             columns={columns}
             defaultOrder="recDtLupd"
             defaultOrderDirection="desc"
-            rowClick={rowData =>
-              history.push({
-                pathname: `/segmentation/details/${rowData[0]}`,
-              })
-            }
+            rowClick={rowData => history.push(`/details/${rowData[0]}`)}
             onTableChangeParent={(action, tableState) => {
               if (action === 'rowSelectionChange') {
                 let selectedRows = getSelectedRows(tableState);

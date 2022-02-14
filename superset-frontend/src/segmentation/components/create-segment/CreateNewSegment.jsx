@@ -1,26 +1,26 @@
-import React, { useEffect, useState, useContext } from "react";
-import LeftPanel from "./LeftPanel";
-import { Paper, Grid, CircularProgress } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import SegmentHeader from "../segmentHeader";
-import SegmentDefinitionCreator from "./segment-definition-creator/SegmentDefinitionCreator";
-import { FilterContext } from "../../context/FilterContext";
-import SaveSegment from "./SaveSegment";
-import { getSingleSegment } from "../../utilities/segmentationOperations";
-import { getCriteriaAttribute } from "../../utilities/createSegmentOperations";
-import SegmentationPanel from "../segmentation-right-panel/SegmentationPanel";
+import React, { useEffect, useState, useContext } from 'react';
+import LeftPanel from './LeftPanel';
+import { Paper, Grid, CircularProgress } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import SegmentHeader from '../segmentHeader';
+import SegmentDefinitionCreator from './segment-definition-creator/SegmentDefinitionCreator';
+import { FilterContext } from '../../context/FilterContext';
+import SaveSegment from './SaveSegment';
+import { getSingleSegment } from '../../utilities/segmentationOperations';
+import { getCriteriaAttribute } from '../../utilities/createSegmentOperations';
+import SegmentationPanel from '../segmentation-right-panel/SegmentationPanel';
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
-    minHeight: "100vh",
+    minHeight: '100vh',
   },
 }));
 
 const CreateNewSegment = ({ match }) => {
-  if (match.url.includes("/segmentation/edit/") && !match.params.segmentID) {
-    this.history.push({
-      pathname: `/segmentation`,
-    });
+  const history = useHistory();
+  if (match.url.includes('/segmentation/edit/') && !match.params.segmentID) {
+    history.push(`/segmentation`);
   }
   const classes = useStyles();
   const {
@@ -32,16 +32,15 @@ const CreateNewSegment = ({ match }) => {
     modifySegmentDetails,
   } = useContext(FilterContext);
 
-  const [editMode, setEditMode] = useState(
-    match.url.includes("/segmentation/edit/")
-  );
+  const [editMode, setEditMode] = useState(match.url.includes('/edit/'));
+  console.log({ match, editMode });
   const [segmentId, setSegmentId] = useState(null);
   const [fetchingSegment, setfetchingSegment] = useState(null);
 
   const [segmentWhereClause, setSegmentWhereClause] = useState();
   const [rightPanelCollapsed, setRightPanelCollapsed] = useState(true);
 
-  const reloadRightPanel = (whereClause) => {
+  const reloadRightPanel = whereClause => {
     setSegmentWhereClause(whereClause);
   };
 
@@ -51,33 +50,33 @@ const CreateNewSegment = ({ match }) => {
       const response = await getSingleSegment(match.params.segmentID);
       const { data: criteriaAttribute } = await getCriteriaAttribute();
 
-      const segment = response.data["JSN"][0];
-      const whereClauses = JSON.parse(segment["whereClauseJson"]);
+      const segment = response.data['JSN'][0];
+      const whereClauses = JSON.parse(segment['whereClauseJson']);
 
-      const whereClausesWithAttributes = whereClauses.map((whereClause) => {
-        let label = whereClause["title"];
-        let attribute = criteriaAttribute[whereClause["title"]];
-        if (label === "CITY") attribute = allCities;
-        if (label === "STATE") attribute = allStates;
-        if (label.startsWith("ZIP")) {
+      const whereClausesWithAttributes = whereClauses.map(whereClause => {
+        let label = whereClause['title'];
+        let attribute = criteriaAttribute[whereClause['title']];
+        if (label === 'CITY') attribute = allCities;
+        if (label === 'STATE') attribute = allStates;
+        if (label.startsWith('ZIP')) {
           attribute = allZips;
         }
 
         return {
           attribute: {
-            [whereClause["title"]]: attribute,
+            [whereClause['title']]: attribute,
           },
           whereClause,
-          label: whereClause["title"],
+          label: whereClause['title'],
         };
       });
       const segmentDetails = {
-        SegmentTitle: segment["TITLE"],
-        SegDesc: segment["DESCRIPTION"],
-        AddTags: segment["TAG"],
+        SegmentTitle: segment['TITLE'],
+        SegDesc: segment['DESCRIPTION'],
+        AddTags: segment['TAG'],
 
         // null is returned from API. If it's store false
-        IsDraft: Boolean(segment["ISDRAFT"]),
+        IsDraft: Boolean(segment['ISDRAFT']),
         isSegEdit: true,
       };
       setSegment(segmentDetails, whereClausesWithAttributes);
@@ -88,8 +87,8 @@ const CreateNewSegment = ({ match }) => {
     }
   }
   useEffect(() => {
-    if (!editMode && match.url.includes("/segmentation/create")) {
-      modifySegmentDetails("", "", "");
+    if (!editMode && match.url.includes('/create')) {
+      modifySegmentDetails('', '', '');
     }
   }, []);
 

@@ -3,28 +3,28 @@ import { authRoles } from "src/ea_oyster_components/auth/authRoles";
 
 const dashboardRoutes = [
   {
-    path: "/segmentation/details/:segmentID",
+    path: "/details/:segmentID",
     Component: React.lazy(() =>
       import("./components/segmentation-details/SegmentationDetails")
     ),
     auth: authRoles.sa,
   },
   {
-    path: "/segmentation/edit/:segmentID",
+    path: "/edit/:segmentID",
     Component: React.lazy(() =>
       import("./components/CreateEditSegmentContainer")
     ),
     auth: authRoles.sa,
   },
   {
-    path: "/segmentation/create",
+    path: "/create",
     Component: React.lazy(() =>
       import("./components/CreateEditSegmentContainer")
     ),
     auth: authRoles.sa,
   },
   {
-    path: "/segmentation/venn/:segmentIDs",
+    path: "/venn/:segmentIDs",
     Component: React.lazy(() =>
 
       import("./components/venn-diagrams/VennDiagramsContainer")

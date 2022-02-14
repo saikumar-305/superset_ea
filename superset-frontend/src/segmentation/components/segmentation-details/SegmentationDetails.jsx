@@ -12,7 +12,7 @@ import {
   getColumnNamesForChecklist,
 } from '../../utilities/segmentationOperations';
 import useSnackbar from 'src/ea_oyster_components/components/useSnackbar';
-import history from 'src/ea_oyster_components/history';
+// import history from 'src/ea_oyster_components/history';
 import useSegmentClone from '../useSegmentClone';
 import SegmentHeader from '../segmentHeader';
 import Dialog from '@material-ui/core/Dialog';
@@ -27,6 +27,7 @@ import List from '@material-ui/core/List';
 import { RegularColumnList, RebidColumnList } from './ExportColumnList';
 import JWTAuthContext from 'src/ea_oyster_components/contexts/JWTAuthContext';
 import { MatxLoading } from 'src/ea_oyster_components/matx';
+import { useHistory } from 'react-router-dom';
 
 /**
  * JSX component - Segmentation details screen. Holds the segment header, right panel
@@ -40,10 +41,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SegmentationDetails = ({ match }) => {
+  const history = useHistory();
   if (!match.params.segmentID) {
-    this.history.push({
-      pathname: `/segmentation`,
-    });
+    history.push(`/segmentation`);
   }
 
   const [segmentID] = useState(match.params.segmentID);
@@ -278,11 +278,7 @@ const SegmentationDetails = ({ match }) => {
               <Button
                 variant="contained"
                 className="mr-3"
-                onClick={() =>
-                  history.push({
-                    pathname: `/segmentation/edit/${segmentID}`,
-                  })
-                }
+                onClick={() => history.push(`/edit/${segmentID}`)}
                 disableElevation
                 disableRipple={true}
               >
