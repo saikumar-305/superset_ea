@@ -49,7 +49,7 @@ const SaveSegment = ({ match }) => {
             ? openSnackBar('Segment Edited!', 'success')
             : openSnackBar('Segment Created!', 'success');
           // Redirect to segmentation home page
-          window.setTimeout(() => history.push('/segmentation'), 3000);
+          window.setTimeout(() => history.push('/'), 3000);
         }
       })
       .catch(error => {
@@ -85,9 +85,7 @@ const SaveSegment = ({ match }) => {
         <Button
           variant="contained"
           onClick={() => {
-            history.push({
-              pathname: `/segmentation/details/${match.params.segmentID}`,
-            });
+            history.push(`/details/${match.params.segmentID}`);
           }}
         >
           Cancel

@@ -30,21 +30,21 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 export const App = () => {
   return (
-    <HashRouter>
-      <DndProvider backend={HTML5Backend} >
-      <Switch>
-        <Route exact path="/" component={SegementationLanding} />
-        <Route
-          exact
-          path="/details/:segmentID"
-          component={SegmentationDetails}
-        />
-        <Route exact path="/edit/:segmentID" component={CreateEditSegmentContainer} />
-        <Route exact path="/create" component={CreateEditSegmentContainer} />
-        <Route exact path="/venn/:segmentIDs" component={VennDiagramContainer}} />
-      </Switch>
+    <DndProvider backend={HTML5Backend} >
+      <HashRouter>
+        <Switch>
+          <Route exact path="/" component={SegementationLanding} />
+          <Route
+            exact
+            path="/details/:segmentID"
+            component={SegmentationDetails}
+          />
+          <Route exact path="/edit/:segmentID" component={CreateEditSegmentContainer} />
+          <Route exact path="/create" component={CreateEditSegmentContainer} />
+          <Route exact path="/venn/:segmentIDs" component={VennDiagramContainer}} />
+        </Switch>
+      </HashRouter>
     </DndProvider>
-    </HashRouter>
   );
 };
 

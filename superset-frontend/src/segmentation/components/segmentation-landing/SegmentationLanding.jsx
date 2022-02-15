@@ -21,7 +21,6 @@ import { useHistory } from 'react-router-dom';
 
 const SegmentationLanding = () => {
   const history = useHistory();
-  console.log(history);
   const { modifySegmentDetails } = useContext(FilterContext);
 
   let [selectedRows, setSelectedRows] = useState([]);

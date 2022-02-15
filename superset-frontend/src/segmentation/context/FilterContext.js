@@ -49,6 +49,8 @@ export const FilterContextProvider = ({ children }) => {
     });
   }
 
+  console.log(state)
+
   function removeAttribute(index) {
     dispatch({
       type: "REMOVE_DEF",

@@ -19,8 +19,8 @@ const useStyles = makeStyles(() => ({
 
 const CreateNewSegment = ({ match }) => {
   const history = useHistory();
-  if (match.url.includes('/segmentation/edit/') && !match.params.segmentID) {
-    history.push(`/segmentation`);
+  if (match.url.includes('/edit/') && !match.params.segmentID) {
+    history.push(`/`);
   }
   const classes = useStyles();
   const {
@@ -98,6 +98,8 @@ const CreateNewSegment = ({ match }) => {
       setSegmentInEdit();
     }
   }, [match.params.segmentID, editMode, isOperatorsLoaded]);
+
+  console.log('Inside Create New Segment');
 
   return (
     <React.Fragment>
