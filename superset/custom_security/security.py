@@ -39,6 +39,7 @@ class CustomAuthDBView(AuthDBView):
             return res
         else:
             return login_response
+            
     def login_api_call(self) -> Response:
         url = "https://oysterapi.expressanalytics.net/api/gw/oauth/token"
  
