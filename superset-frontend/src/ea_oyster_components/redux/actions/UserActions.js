@@ -1,4 +1,4 @@
-import history from "history.js";
+import history from "src/ea_oyster_components/history";
 import jwtAuthService from "../../services/jwtAuthService";
 
 export const SET_USER_DATA = "USER_SET_DATA";

@@ -1,10 +1,10 @@
 import jwtAuthService from "../../services/jwtAuthService";
 import FirebaseAuthService from "../../services/firebase/firebaseAuthService";
 import { setUserData } from "./UserActions";
-import history from "history.js";
-import axios from "axios.js";
-import apiPaths from "app/constants/apiPaths";
-import C1Popup from "../../c1component/C1Popup";
+import history from "src/ea_oyster_components/history";
+import axios from "src/ea_oyster_components/axios";
+import apiPaths from "src/ea_oyster_components/constants/apiPaths";
+import C1Popup from "src/ea_oyster_components/c1component/C1Popup";
 
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

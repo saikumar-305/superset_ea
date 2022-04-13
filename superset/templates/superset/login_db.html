@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oyster</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(rgb(237, 122, 122), rgb(250, 116, 138));
+        display: grid;
+        place-items: center;
+        font-size: 1.2rem;
+      }
+      .form_container {
+        background: rgb(225, 175, 175);
+        padding: 3rem;
+        border: 1px solid rgb(136, 12, 12);
+        border-radius: 0.5rem;
+      }
+      input {
+        margin: 0.5rem 0rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form_container">
+      <form method="POST" action="/login/">
+        <label for="username">Email: </label>
+        <br />
+        <!-- <input type="text" id="username" placeholder="name@example.com" /> -->
+        {{form.username(placeholder="Email")}}
+        <br />
+        <label for="password">Password: </label>
+        <br />
+        <!-- <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="enter password"
+        /> -->
+        {{form.password(placeholder="Password")}}
+        <br />
+        <input
+          class="btn btn-block login-btn"
+          type="submit"
+          value="{{_('Login')}}"
+        />
+      </form>
+    </div>
+  </body>
+</html>

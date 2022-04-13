@@ -1,34 +1,34 @@
-import React, { useContext, useEffect, useRef, useCallback } from "react";
-import { MatxLayouts } from "./index";
-import { useLocation } from "react-router-dom";
-import { matchRoutes } from "react-router-config";
-import { useDispatch, useSelector } from "react-redux";
-import AppContext from "app/appContext";
-import { setLayoutSettings } from "app/redux/actions/LayoutActions";
-import { isEqual, merge } from "lodash";
-import { MatxSuspense } from "matx";
-import { useMediaQuery } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
+import React, { useContext, useEffect, useRef, useCallback } from 'react';
+import { MatxLayouts } from './index';
+import { useLocation } from 'react-router-dom';
+import { matchRoutes } from 'react-router-config';
+import { useDispatch, useSelector } from 'react-redux';
+import AppContext from 'src/ea_oyster_components/appContext';
+import { setLayoutSettings } from 'src/ea_oyster_components/redux/actions/LayoutActions';
+import { isEqual, merge } from 'lodash';
+import { MatxSuspense } from 'src/ea_oyster_components/matx';
+import { useMediaQuery } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 
-const MatxLayoutSFC = (props) => {
+const MatxLayoutSFC = props => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const appContext = useContext(AppContext);
-  const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const settings = useSelector((state) => state.layout.settings);
-  const defaultSettings = useSelector((state) => state.layout.defaultSettings);
+  const isMdScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const settings = useSelector(state => state.layout.settings);
+  const defaultSettings = useSelector(state => state.layout.defaultSettings);
   const ref = useRef({ appContext, isMdScreen, settings, defaultSettings });
 
   useEffect(() => {
     let { settings } = ref.current;
 
     if (settings.layout1Settings.leftSidebar.show) {
-      let mode = isMdScreen ? "close" : "compact";
+      let mode = isMdScreen ? 'close' : 'compact';
       dispatch(
         setLayoutSettings(
-          merge({}, settings, { layout1Settings: { leftSidebar: { mode } } })
-        )
+          merge({}, settings, { layout1Settings: { leftSidebar: { mode } } }),
+        ),
       );
     }
   }, [isMdScreen, dispatch]);
@@ -47,10 +47,10 @@ const MatxLayoutSFC = (props) => {
           setLayoutSettings(
             isMdScreen
               ? merge({}, updatedSettings, {
-                  layout1Settings: { leftSidebar: { mode: "close" } },
+                  layout1Settings: { leftSidebar: { mode: 'close' } },
                 })
-              : updatedSettings
-          )
+              : updatedSettings,
+          ),
         );
       }
     } else if (!isEqual(settings, defaultSettings)) {
@@ -58,10 +58,10 @@ const MatxLayoutSFC = (props) => {
         setLayoutSettings(
           isMdScreen
             ? merge({}, defaultSettings, {
-                layout1Settings: { leftSidebar: { mode: "close" } },
+                layout1Settings: { leftSidebar: { mode: 'close' } },
               })
-            : defaultSettings
-        )
+            : defaultSettings,
+        ),
       );
     }
   }, [pathname, dispatch]);

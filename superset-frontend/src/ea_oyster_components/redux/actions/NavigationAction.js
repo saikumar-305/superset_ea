@@ -1,5 +1,5 @@
-import axios from "axios.js";
-import apiConstants from "app/constants/apiPaths";
+import axios from "src/ea_oyster_components/axios";
+import apiConstants from "src/ea_oyster_components/constants/apiPaths";
 export const SET_USER_NAVIGATION = "SET_USER_NAVIGATION";
 
 const getfilteredNavigations = (navList = [], role) => {
@@ -34,7 +34,7 @@ export function getNavigationByUser() {
 }
 
 export function getDynamicNavigationByUser() {
- // console.log("getDynamicNavigationByUser");
+  // console.log("getDynamicNavigationByUser");
   return (dispatch, getState) => {
     axios.defaults.withCredentials = false;
     let url = apiConstants.GET_MENUITEMS;

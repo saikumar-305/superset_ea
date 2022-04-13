@@ -18,34 +18,5 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Link, Route, Switch } from 'react-router-dom';
-import { Router } from 'react-router-dom';
-import history from 'src/ea_oyster_components/history';
-import SegementationLanding from './components/segmentation-landing/SegmentationLanding';
-import SegmentationDetails from './components/segmentation-details/SegmentationDetails';
-import CreateEditSegmentContainer from './components/CreateEditSegmentContainer';
-import VennDiagramContainer from './components/venn-diagrams/VennDiagramsContainer';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-
-export const App = () => {
-  return (
-    <DndProvider backend={HTML5Backend} >
-      <HashRouter>
-        <Switch>
-          <Route exact path="/" component={SegementationLanding} />
-          <Route
-            exact
-            path="/details/:segmentID"
-            component={SegmentationDetails}
-          />
-          <Route exact path="/edit/:segmentID" component={CreateEditSegmentContainer} />
-          <Route exact path="/create" component={CreateEditSegmentContainer} />
-          <Route exact path="/venn/:segmentIDs" component={VennDiagramContainer}} />
-        </Switch>
-      </HashRouter>
-    </DndProvider>
-  );
-};
-
+import App from './App';
 ReactDOM.render(<App />, document.getElementById('app'));

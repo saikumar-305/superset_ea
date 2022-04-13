@@ -1,27 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setLayoutSettings } from "app/redux/actions/LayoutActions";
-import { Fab, IconButton, Icon, useMediaQuery } from "@material-ui/core";
-import { merge } from "lodash";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLayoutSettings } from 'src/ea_oyster_components/redux/actions/LayoutActions';
+import { Fab, IconButton, Icon, useMediaQuery } from '@material-ui/core';
+import { merge } from 'lodash';
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(({ palette, ...theme }) => ({
   toggle: {
-    position: "fixed",
-    right: "-30px",
-    bottom: "20px",
+    position: 'fixed',
+    right: '-30px',
+    bottom: '20px',
     zIndex: 9999,
-    transition: "all 0.15s ease",
-    "&.open": {
-      right: "10px",
+    transition: 'all 0.15s ease',
+    '&.open': {
+      right: '10px',
     },
   },
 }));
 
 const SecondarySidebarToggle = () => {
-  const isMobile = useMediaQuery("(max-width:767px)");
+  const isMobile = useMediaQuery('(max-width:767px)');
   const classes = useStyles();
   const dispatch = useDispatch();
   const { settings } = useSelector(({ layout }) => layout);
@@ -31,8 +31,8 @@ const SecondarySidebarToggle = () => {
       setLayoutSettings(
         merge({}, settings, {
           secondarySidebar: { open: !settings.secondarySidebar.open },
-        })
-      )
+        }),
+      ),
     );
   };
 
@@ -41,8 +41,8 @@ const SecondarySidebarToggle = () => {
       setLayoutSettings(
         merge({}, settings, {
           secondarySidebar: { open: !isMobile },
-        })
-      )
+        }),
+      ),
     );
   }, [isMobile, setLayoutSettings]);
 

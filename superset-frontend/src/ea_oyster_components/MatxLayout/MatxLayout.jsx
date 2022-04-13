@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { MatxLayouts } from "./index";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
-import { matchRoutes } from "react-router-config";
-import { connect } from "react-redux";
-import AppContext from "app/appContext";
+import React, { Component } from 'react';
+import { MatxLayouts } from './index';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { matchRoutes } from 'react-router-config';
+import { connect } from 'react-redux';
+import AppContext from 'src/ea_oyster_components/appContext';
 import {
   setLayoutSettings,
   setDefaultSettings,
-} from "app/redux/actions/LayoutActions";
-import { isEqual, merge } from "lodash";
-import { isMdScreen, getQueryParam } from "utils";
-import { MatxSuspense } from "matx";
+} from 'src/ea_oyster_components/redux/actions/LayoutActions';
+import { isEqual, merge } from 'lodash';
+import { isMdScreen, getQueryParam } from 'utils';
+import { MatxSuspense } from 'src/ea_oyster_components/matx';
 
 class MatxLayout extends Component {
   constructor(props, context) {
@@ -33,19 +33,19 @@ class MatxLayout extends Component {
     this.listenWindowResize();
     if (window) {
       // LISTEN WINDOW RESIZE
-      window.addEventListener("resize", this.listenWindowResize);
+      window.addEventListener('resize', this.listenWindowResize);
     }
   }
 
   componentWillUnmount() {
     if (window) {
-      window.removeEventListener("resize", this.listenWindowResize);
+      window.removeEventListener('resize', this.listenWindowResize);
     }
   }
 
   setLayoutFromQuery = () => {
     try {
-      let settingsFromQuery = getQueryParam("settings");
+      let settingsFromQuery = getQueryParam('settings');
       settingsFromQuery = settingsFromQuery
         ? JSON.parse(settingsFromQuery)
         : {};
@@ -63,9 +63,9 @@ class MatxLayout extends Component {
     let { settings, setLayoutSettings } = this.props;
 
     if (settings.layout1Settings.leftSidebar.show) {
-      let mode = isMdScreen() ? "close" : "full";
+      let mode = isMdScreen() ? 'close' : 'full';
       setLayoutSettings(
-        merge({}, settings, { layout1Settings: { leftSidebar: { mode } } })
+        merge({}, settings, { layout1Settings: { leftSidebar: { mode } } }),
       );
     }
   };
@@ -100,7 +100,7 @@ class MatxLayout extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   setLayoutSettings: PropTypes.func.isRequired,
   setDefaultSettings: PropTypes.func.isRequired,
   settings: state.layout.settings,
@@ -111,6 +111,6 @@ MatxLayout.contextType = AppContext;
 
 export default withRouter(
   connect(mapStateToProps, { setLayoutSettings, setDefaultSettings })(
-    MatxLayout
-  )
+    MatxLayout,
+  ),
 );

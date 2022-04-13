@@ -1,25 +1,25 @@
-import React, { useContext } from "react";
-import { useSelector } from "react-redux";
-import { ThemeProvider } from "@material-ui/core/styles";
-import Scrollbar from "react-perfect-scrollbar";
-import { renderRoutes } from "react-router-config";
-import Layout1Topbar from "./Layout1Topbar";
-import Layout1Sidenav from "./Layout1Sidenav";
-import Footer from "../SharedCompoents/Footer";
-import SecondarySidebar from "../SharedCompoents/SecondarySidebar/SecondarySidebar";
-import AppContext from "app/appContext";
-import { MatxSuspense } from "matx";
-import { useTheme } from "@material-ui/core/styles";
-import clsx from "clsx";
-import SidenavTheme from "../MatxTheme/SidenavTheme/SidenavTheme";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { ThemeProvider } from '@material-ui/core/styles';
+import Scrollbar from 'react-perfect-scrollbar';
+import { renderRoutes } from 'react-router-config';
+import Layout1Topbar from './Layout1Topbar';
+import Layout1Sidenav from './Layout1Sidenav';
+import Footer from '../SharedCompoents/Footer';
+import SecondarySidebar from '../SharedCompoents/SecondarySidebar/SecondarySidebar';
+import AppContext from 'src/ea_oyster_components/appContext';
+import { MatxSuspense } from 'src/ea_oyster_components/matx';
+import { useTheme } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import SidenavTheme from '../MatxTheme/SidenavTheme/SidenavTheme';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(({ palette, ...theme }) => ({
   contentWrap: ({ width, secondarySidebar }) => ({
-    verticalAlign: "top",
+    verticalAlign: 'top',
     marginLeft: width,
-    transition: "all 0.3s ease",
-    [theme.breakpoints.up("md")]: {
+    transition: 'all 0.3s ease',
+    [theme.breakpoints.up('md')]: {
       marginRight: secondarySidebar.open ? 50 : 0,
     },
   }),
@@ -27,13 +27,13 @@ const useStyles = makeStyles(({ palette, ...theme }) => ({
     top: 0,
     zIndex: 96,
     background:
-      "linear-gradient(180deg, rgba(255, 255, 255, 0.95) 44%, rgba(247, 247, 247, 0.4) 50%, rgba(255, 255, 255, 0))",
-    transition: "all 0.3s ease",
+      'linear-gradient(180deg, rgba(255, 255, 255, 0.95) 44%, rgba(247, 247, 247, 0.4) 50%, rgba(255, 255, 255, 0))',
+    transition: 'all 0.3s ease',
   },
 }));
-
+console.log('Inside Layout1 ');
 const Layout1 = () => {
-  const { settings } = useSelector((state) => state.layout);
+  const { settings } = useSelector(state => state.layout);
   const { layout1Settings, secondarySidebar } = settings;
   const {
     leftSidebar: { mode: sidenavMode, show: showSidenav },
@@ -42,12 +42,12 @@ const Layout1 = () => {
 
   const getSidenavWidth = () => {
     switch (sidenavMode) {
-      case "full":
-        return "var(--sidenav-width)";
-      case "compact":
-        return "var(--sidenav-compact-width)";
+      case 'full':
+        return 'var(--sidenav-width)';
+      case 'compact':
+        return 'var(--sidenav-compact-width)';
       default:
-        return "0px";
+        return '0px';
     }
   };
 
@@ -59,8 +59,8 @@ const Layout1 = () => {
   const layoutClasses = `theme-${theme.palette.type} flex`;
 
   return (
-    <div className={clsx("bg-default", layoutClasses)}>
-      {showSidenav && sidenavMode !== "close" && (
+    <div className={clsx('bg-default', layoutClasses)}>
+      {showSidenav && sidenavMode !== 'close' && (
         <SidenavTheme>
           <Layout1Sidenav />
         </SidenavTheme>
@@ -68,8 +68,8 @@ const Layout1 = () => {
 
       <div
         className={clsx(
-          "flex-grow flex-column relative overflow-hidden h-full-screen",
-          classes.contentWrap
+          'flex-grow flex-column relative overflow-hidden h-full-screen',
+          classes.contentWrap,
         )}
       >
         {layout1Settings.topbar.show && layout1Settings.topbar.fixed && (

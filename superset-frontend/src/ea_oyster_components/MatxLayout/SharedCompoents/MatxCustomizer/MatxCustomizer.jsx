@@ -1,9 +1,9 @@
-import React, { Fragment, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { Fragment, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setLayoutSettings,
   setDefaultSettings,
-} from "app/redux/actions/LayoutActions";
+} from 'src/ea_oyster_components/redux/actions/LayoutActions';
 import {
   Icon,
   IconButton,
@@ -16,73 +16,73 @@ import {
   FormLabel,
   Link,
   Card,
-} from "@material-ui/core";
-import Scrollbar from "react-perfect-scrollbar";
-import { merge, get, set } from "lodash";
-import Layout1Customizer from "./Layout1Customizer";
-import Layout2Customizer from "./Layout2Customizer";
-import { themeColors } from "../../MatxTheme/themeColors";
-import BadgeSelected from "./BadgeSelected";
-import { mainThemes, topbarThemes } from "./customizerOptions";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
-import clsx from "clsx";
+} from '@material-ui/core';
+import Scrollbar from 'react-perfect-scrollbar';
+import { merge, get, set } from 'lodash';
+import Layout1Customizer from './Layout1Customizer';
+import Layout2Customizer from './Layout2Customizer';
+import { themeColors } from '../../MatxTheme/themeColors';
+import BadgeSelected from './BadgeSelected';
+import { mainThemes, topbarThemes } from './customizerOptions';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(({ palette, ...theme }) => ({
   label: {
     color: palette.secondary.main,
     backgroundColor: palette.primary.dark,
     fontWeight: 700,
-    transform: "rotate(90deg)",
-    marginBottom: "2.5rem",
-    padding: ".25rem .5rem",
-    borderRadius: "4px",
-    cursor: "pointer",
-    letterSpacing: "1.5px",
-    fontSize: "1rem",
-    "&:hover, &.open": {
+    transform: 'rotate(90deg)',
+    marginBottom: '2.5rem',
+    padding: '.25rem .5rem',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    letterSpacing: '1.5px',
+    fontSize: '1rem',
+    '&:hover, &.open': {
       backgroundColor: palette.secondary.main,
       color: palette.secondary.contrastText,
     },
   },
   helpText: {
-    margin: "0px .5rem 1rem",
+    margin: '0px .5rem 1rem',
   },
   maxCustomizer: {
-    position: "fixed",
+    position: 'fixed',
     top: 0,
     right: 0,
     zIndex: 50,
   },
   customizerCloseButton: {
-    position: "absolute",
+    position: 'absolute',
     right: 8,
     top: 8,
   },
   layoutBox: {
-    "&:hover": {
-      "& .layout-name": {
-        position: "absolute",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100%",
-        width: "100%",
-        background: "rgba(0,0,0,0.3)",
+    '&:hover': {
+      '& .layout-name': {
+        position: 'absolute',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+        width: '100%',
+        background: 'rgba(0,0,0,0.3)',
         zIndex: 12,
       },
     },
   },
 }));
 
-const MatxCustomizer = (props) => {
+const MatxCustomizer = props => {
   const [open, setOpen] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
 
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { settings } = useSelector((state) => state.layout);
+  const { settings } = useSelector(state => state.layout);
 
-  const updateSettings = (newSettings) => {
+  const updateSettings = newSettings => {
     let updatedSettings = merge({}, settings, newSettings);
     dispatch(setLayoutSettings(updatedSettings));
     dispatch(setDefaultSettings(updatedSettings));
@@ -94,9 +94,9 @@ const MatxCustomizer = (props) => {
     updateSettings(updatedSettings);
   };
 
-  const handleControlChange = (name) => (event) => {
+  const handleControlChange = name => event => {
     let controlValue =
-      event.target.type === "checkbox"
+      event.target.type === 'checkbox'
         ? event.target.checked
         : event.target.value;
     handleChange(name, controlValue);
@@ -105,7 +105,7 @@ const MatxCustomizer = (props) => {
   const tooglePanel = () => {
     setOpen(!open);
   };
-  const handleTabChange = (index) => {
+  const handleTabChange = index => {
     setTabIndex(index);
   };
 
@@ -126,8 +126,8 @@ const MatxCustomizer = (props) => {
         <ThemeProvider theme={activeTheme}>
           <div
             className={clsx(
-              "flex-column fixed w-320 pb-8 elevation-z12 h-full-screen bg-default",
-              classes.maxCustomizer
+              'flex-column fixed w-320 pb-8 elevation-z12 h-full-screen bg-default',
+              classes.maxCustomizer,
             )}
           >
             <div className="flex items-center px-5 py-4 mb-4 min-h-64 elevation-z6">
@@ -143,7 +143,7 @@ const MatxCustomizer = (props) => {
             <div className="px-6 mb-4 flex">
               <Button
                 variant="outlined"
-                color={tabIndex === 0 ? "secondary" : "primary"}
+                color={tabIndex === 0 ? 'secondary' : 'primary'}
                 onClick={() => handleTabChange(0)}
                 className="mr-4"
               >
@@ -151,7 +151,7 @@ const MatxCustomizer = (props) => {
               </Button>
               <Button
                 variant="outlined"
-                color={tabIndex === 1 ? "secondary" : "primary"}
+                color={tabIndex === 1 ? 'secondary' : 'primary'}
                 onClick={() => handleTabChange(1)}
               >
                 Settings
@@ -164,14 +164,14 @@ const MatxCustomizer = (props) => {
                   <div className="text-muted">Layouts</div>
 
                   <div className="flex-column">
-                    {demoLayouts.map((layout) => (
+                    {demoLayouts.map(layout => (
                       <BadgeSelected
                         color="secondary"
                         className={clsx(
-                          "w-full my-3 max-h-152 cursor-pointer",
-                          classes.layoutBox
+                          'w-full my-3 max-h-152 cursor-pointer',
+                          classes.layoutBox,
                         )}
-                        badgeContent={"Pro"}
+                        badgeContent={'Pro'}
                         invisible={!layout.isPro}
                         key={layout.name}
                       >
@@ -204,7 +204,7 @@ const MatxCustomizer = (props) => {
                 <div>
                   <div className={classes.helpText}>
                     Set different themes to body, topbar, sidebar, footer & etc.
-                    Check out the{" "}
+                    Check out the{' '}
                     <Link
                       href="http://demos.ui-lib.com/matx-react-doc/layout.html"
                       target="_blank"
@@ -239,7 +239,7 @@ const MatxCustomizer = (props) => {
                     </div>
                   </div>
 
-                  {settings.activeLayout === "layout1" && (
+                  {settings.activeLayout === 'layout1' && (
                     <Layout1Customizer
                       settings={settings}
                       handleChange={handleChange}
@@ -247,7 +247,7 @@ const MatxCustomizer = (props) => {
                     />
                   )}
 
-                  {settings.activeLayout === "layout2" && (
+                  {settings.activeLayout === 'layout2' && (
                     <Layout2Customizer
                       settings={settings}
                       handleChange={handleChange}
@@ -262,8 +262,8 @@ const MatxCustomizer = (props) => {
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={get(settings.footer, "show")}
-                              onChange={handleControlChange("footer.show")}
+                              checked={get(settings.footer, 'show')}
+                              onChange={handleControlChange('footer.show')}
                             />
                           }
                           label="Show"
@@ -274,9 +274,9 @@ const MatxCustomizer = (props) => {
                             <Switch
                               checked={get(
                                 settings.layout1Settings.footer,
-                                "fixed"
+                                'fixed',
                               )}
-                              onChange={handleControlChange("footer.fixed")}
+                              onChange={handleControlChange('footer.fixed')}
                             />
                           }
                           label="Fixed"
@@ -294,9 +294,9 @@ const MatxCustomizer = (props) => {
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={get(settings.secondarySidebar, "show")}
+                              checked={get(settings.secondarySidebar, 'show')}
                               onChange={handleControlChange(
-                                "secondarySidebar.show"
+                                'secondarySidebar.show',
                               )}
                             />
                           }
@@ -316,7 +316,7 @@ const MatxCustomizer = (props) => {
                           <div
                             className="flex justify-center items-center h-40 w-40 border-radius-4 m-2 cursor-pointer elevation-z3"
                             onClick={() =>
-                              handleChange("secondarySidebar.theme", color)
+                              handleChange('secondarySidebar.theme', color)
                             }
                             style={{
                               backgroundColor:
@@ -342,7 +342,7 @@ const MatxCustomizer = (props) => {
                         <Tooltip key={i} title={color} placement="top">
                           <div
                             className="flex justify-center items-center h-40 w-40 border-radius-4 m-2 cursor-pointer elevation-z3"
-                            onClick={() => handleChange("footer.theme", color)}
+                            onClick={() => handleChange('footer.theme', color)}
                             style={{
                               backgroundColor:
                                 themeColors[color].palette.primary.main,
@@ -371,80 +371,80 @@ const MatxCustomizer = (props) => {
 
 const demoLayouts = [
   {
-    name: "Light Sidebar",
-    thumbnail: "/assets/images/screenshots/layout1-customizer.png",
+    name: 'Light Sidebar',
+    thumbnail: '/assets/images/screenshots/layout1-customizer.png',
     isPro: false,
     options: {
-      activeLayout: "layout1",
-      activeTheme: "blue",
+      activeLayout: 'layout1',
+      activeTheme: 'blue',
       layout1Settings: {
         leftSidebar: {
-          theme: "whiteBlue",
+          theme: 'whiteBlue',
           bgOpacity: 0.98,
         },
         topbar: {
-          theme: "blueDark",
+          theme: 'blueDark',
           fixed: true,
         },
       },
       footer: {
-        theme: "slateDark1",
+        theme: 'slateDark1',
       },
     },
   },
   {
-    name: "Dark Sidebar",
-    thumbnail: "/assets/images/screenshots/layout1-blue-customizer.png",
+    name: 'Dark Sidebar',
+    thumbnail: '/assets/images/screenshots/layout1-blue-customizer.png',
     isPro: false,
     options: {
-      activeLayout: "layout1",
-      activeTheme: "blue",
+      activeLayout: 'layout1',
+      activeTheme: 'blue',
       layout1Settings: {
         leftSidebar: {
-          theme: "slateDark1",
+          theme: 'slateDark1',
           bgOpacity: 0.92,
         },
         topbar: {
-          theme: "blueDark",
+          theme: 'blueDark',
           fixed: true,
         },
       },
     },
   },
   {
-    name: "Dark Theme",
-    thumbnail: "/assets/images/screenshots/layout3-customizer.png",
+    name: 'Dark Theme',
+    thumbnail: '/assets/images/screenshots/layout3-customizer.png',
     isPro: false,
     options: {
-      activeLayout: "layout1",
-      activeTheme: "purpleDark1",
+      activeLayout: 'layout1',
+      activeTheme: 'purpleDark1',
       layout1Settings: {
         leftSidebar: {
-          theme: "slateDark1",
+          theme: 'slateDark1',
           bgOpacity: 0.92,
         },
         topbar: {
-          theme: "purpleDark1",
+          theme: 'purpleDark1',
           fixed: true,
         },
       },
       footer: {
-        theme: "slateDark1",
+        theme: 'slateDark1',
       },
     },
   },
   {
-    name: "Horizontal Navigation",
-    thumbnail: "/assets/images/screenshots/layout4-customizer.png",
+    name: 'Horizontal Navigation',
+    thumbnail: '/assets/images/screenshots/layout4-customizer.png',
     isPro: true,
     options: {
-      activeLayout: "layout2",
-      activeTheme: "purple1",
+      activeLayout: 'layout2',
+      activeTheme: 'purple1',
       layout2Settings: {
-        mode: "full",
+        mode: 'full',
       },
       footer: {
-        theme: "slateDark1",
+        theme: 'slateDark1',
       },
     },
   },

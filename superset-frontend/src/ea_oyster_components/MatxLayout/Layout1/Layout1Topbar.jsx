@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Icon,
   IconButton,
@@ -6,79 +6,79 @@ import {
   Avatar,
   useMediaQuery,
   Hidden,
-} from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { setLayoutSettings } from "app/redux/actions/LayoutActions";
-import { MatxMenu } from "matx";
+} from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLayoutSettings } from 'src/ea_oyster_components/redux/actions/LayoutActions';
+import { MatxMenu } from 'src/ea_oyster_components/matx';
 
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { merge } from "lodash";
-import clsx from "clsx";
-import useAuth from "app/hooks/useAuth";
-import useFeedback from "app/components/useFeedback";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { merge } from 'lodash';
+import clsx from 'clsx';
+import useAuth from 'src/ea_oyster_components/hooks/useAuth';
+import useFeedback from 'src/ea_oyster_components/components/useFeedback';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
 import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from "@material-ui/core";
-import { updatePassword } from "../../updatePasswordRoute";
-import useSnackbar from "../../components/useSnackbar";
-import { MatxLoading } from "matx";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+} from '@material-ui/core';
+import { updatePassword } from '../../updatePasswordRoute';
+import useSnackbar from '../../components/useSnackbar';
+import { MatxLoading } from 'src/ea_oyster_components/matx';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import {
   InputLabel,
   InputAdornment,
   FormControl,
   OutlinedInput,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 const useStyles = makeStyles(({ palette, ...theme }) => ({
   topbar: {
     top: 0,
     zIndex: 96,
-    transition: "all 0.3s ease",
+    transition: 'all 0.3s ease',
     background:
-      "linear-gradient(180deg, rgba(255, 255, 255, 0.95) 44%, rgba(247, 247, 247, 0.4) 50%, rgba(255, 255, 255, 0))",
+      'linear-gradient(180deg, rgba(255, 255, 255, 0.95) 44%, rgba(247, 247, 247, 0.4) 50%, rgba(255, 255, 255, 0))',
 
-    "& .topbar-hold": {
+    '& .topbar-hold': {
       backgroundColor: palette.primary.main,
       height: 80,
       paddingLeft: 18,
       paddingRight: 20,
-      [theme.breakpoints.down("sm")]: {
+      [theme.breakpoints.down('sm')]: {
         paddingLeft: 16,
         paddingRight: 16,
       },
-      [theme.breakpoints.down("xs")]: {
+      [theme.breakpoints.down('xs')]: {
         paddingLeft: 14,
         paddingRight: 16,
       },
     },
-    "& .fixed": {
+    '& .fixed': {
       boxShadow: theme.shadows[8],
       height: 64,
     },
   },
   userMenu: {
-    display: "flex",
-    alignItems: "center",
-    cursor: "pointer",
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer',
     borderRadius: 24,
     padding: 4,
-    "& span": {
-      margin: "0 8px",
+    '& span': {
+      margin: '0 8px',
       // color: palette.text.secondary
     },
-    "&:hover": {
+    '&:hover': {
       backgroundColor: palette.action.hover,
     },
   },
   menuItem: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     minWidth: 185,
   },
 }));
@@ -89,12 +89,12 @@ const Layout1Topbar = () => {
   const dispatch = useDispatch();
   const { settings } = useSelector(({ layout }) => layout);
   const { logout, user } = useAuth();
-  const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const isMdScreen = useMediaQuery(theme.breakpoints.down('md'));
   const fixed = settings?.layout1Settings?.topbar?.fixed;
 
   const [_, FeedbackDialog, setOpen] = useFeedback();
 
-  const updateSidebarMode = (sidebarSettings) => {
+  const updateSidebarMode = sidebarSettings => {
     dispatch(
       setLayoutSettings(
         merge({}, settings, {
@@ -103,8 +103,8 @@ const Layout1Topbar = () => {
               ...sidebarSettings,
             },
           },
-        })
-      )
+        }),
+      ),
     );
   };
 
@@ -113,22 +113,22 @@ const Layout1Topbar = () => {
     let mode;
 
     if (isMdScreen) {
-      mode = layout1Settings.leftSidebar.mode === "close" ? "mobile" : "close";
+      mode = layout1Settings.leftSidebar.mode === 'close' ? 'mobile' : 'close';
     } else {
-      mode = layout1Settings.leftSidebar.mode === "full" ? "close" : "full";
+      mode = layout1Settings.leftSidebar.mode === 'full' ? 'close' : 'full';
     }
 
     updateSidebarMode({ mode });
   };
-  const [SnackBar, openSnackBar] = useSnackbar("", "success");
+  const [SnackBar, openSnackBar] = useSnackbar('', 'success');
 
   const [passwordOpen, setPasswordOpen] = React.useState(false);
-  let [oldPassword, setOldPassword] = useState("");
-  let [newPassword, setNewPassword] = useState("");
-  let [confirmPassword, setConfirmPassword] = useState("");
+  let [oldPassword, setOldPassword] = useState('');
+  let [newPassword, setNewPassword] = useState('');
+  let [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const [values, setValues] = React.useState("");
+  const [values, setValues] = React.useState('');
   const handleClickOpen = () => {
     setPasswordOpen(true);
   };
@@ -150,47 +150,47 @@ const Layout1Topbar = () => {
 
   const handleSubmit = () => {
     const requestBody = {};
-    requestBody["oldPassword"] = oldPassword;
-    requestBody["newPassword"] = newPassword;
+    requestBody['oldPassword'] = oldPassword;
+    requestBody['newPassword'] = newPassword;
     setLoading(true);
-    if (newPassword === "" || confirmPassword === "") {
-      openSnackBar("Password fields can't be empty.", "error");
+    if (newPassword === '' || confirmPassword === '') {
+      openSnackBar("Password fields can't be empty.", 'error');
       return;
     }
     if (
       !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
-        newPassword
+        newPassword,
       )
     ) {
-      openSnackBar("Entered password did not match the guidelines.", "error");
+      openSnackBar('Entered password did not match the guidelines.', 'error');
       return;
     }
     if (newPassword === confirmPassword) {
       updatePassword(requestBody)
-        .then((response) => {
-          if (response.data.success === "true") {
+        .then(response => {
+          if (response.data.success === 'true') {
             setLoading(false);
 
             openSnackBar(
-              response.data.general_message + " Now logging out.",
-              "success"
+              response.data.general_message + ' Now logging out.',
+              'success',
             );
             setTimeout(() => {
               logout();
             }, 3000);
           } else {
             setLoading(false);
-            openSnackBar(response.data.general_message, "error");
+            openSnackBar(response.data.general_message, 'error');
           }
         })
         .catch(() => {
           setLoading(false);
-          openSnackBar("Password update failed!", "error");
+          openSnackBar('Password update failed!', 'error');
         });
     } else {
       openSnackBar(
-        "The Confirm Password does not match, Please try again!",
-        "error"
+        'The Confirm Password does not match, Please try again!',
+        'error',
       );
     }
   };
@@ -198,7 +198,7 @@ const Layout1Topbar = () => {
   return (
     <React.Fragment>
       <div className={classes.topbar}>
-        <div className={clsx({ "topbar-hold": true, fixed: fixed })}>
+        <div className={clsx({ 'topbar-hold': true, fixed: fixed })}>
           <div className="flex justify-between items-center h-full">
             <div className="flex">
               <IconButton onClick={handleSidebarToggle} className="hide-on-pc">
@@ -251,25 +251,25 @@ const Layout1Topbar = () => {
 
         <form>
           <DialogContent>
-            <DialogContentText style={{ color: "#000000" }}>
+            <DialogContentText style={{ color: '#000000' }}>
               ATTENTION: You will be logged out once you update your password.
             </DialogContentText>
-            <DialogContentText style={{ color: "#DA291C" }}>
-              {" "}
+            <DialogContentText style={{ color: '#DA291C' }}>
+              {' '}
               (Guidelines: Password must contain eight characters, at least one
               uppercase letter, one lowercase letter, one number and one special
               character.)
             </DialogContentText>
 
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 Current Password
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
+                type={values.showPassword ? 'text' : 'password'}
                 value={values.password}
-                onChange={(e) => setOldPassword(e.target.value)}
+                onChange={e => setOldPassword(e.target.value)}
                 //onChange={handleChange("password")}
                 endAdornment={
                   <InputAdornment position="end">
@@ -288,15 +288,15 @@ const Layout1Topbar = () => {
             </FormControl>
             <br></br>
             <h6> </h6>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 New Password
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
+                type={values.showPassword ? 'text' : 'password'}
                 value={values.password}
-                onChange={(e) => setNewPassword(e.target.value)}
+                onChange={e => setNewPassword(e.target.value)}
                 //onChange={handleChange("password")}
                 endAdornment={
                   <InputAdornment position="end">
@@ -315,15 +315,15 @@ const Layout1Topbar = () => {
             </FormControl>
             <br></br>
             <h6> </h6>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 Confirm Password
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
+                type={values.showPassword ? 'text' : 'password'}
                 value={values.password}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={e => setConfirmPassword(e.target.value)}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton

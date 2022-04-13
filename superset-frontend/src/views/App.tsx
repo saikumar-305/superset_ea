@@ -28,6 +28,7 @@ import { initFeatureFlags } from 'src/featureFlags';
 import ErrorBoundary from 'src/components/ErrorBoundary';
 import Loading from 'src/components/Loading';
 import Menu from 'src/views/components/Menu';
+import Sidenav from 'src/ea_oyster_components/Sidenav';
 import { bootstrapData } from 'src/preamble';
 import ToastContainer from 'src/components/MessageToasts/ToastContainer';
 import setupApp from 'src/setup/setupApp';
@@ -60,17 +61,20 @@ const App = () => (
     <LocationPathnameLogger />
     <RootContextProviders>
       <Menu data={menu} isFrontendRoute={isFrontendRoute} />
-      <Switch>
-        {routes.map(({ path, Component, props = {}, Fallback = Loading }) => (
-          <Route path={path} key={path}>
-            <Suspense fallback={<Fallback />}>
-              <ErrorBoundary>
-                <Component user={user} {...props} />
-              </ErrorBoundary>
-            </Suspense>
-          </Route>
-        ))}
-      </Switch>
+      <Sidenav />
+      <div style={{ paddingLeft: '4.5rem' }}>
+        <Switch>
+          {routes.map(({ path, Component, props = {}, Fallback = Loading }) => (
+            <Route path={path} key={path}>
+              <Suspense fallback={<Fallback />}>
+                <ErrorBoundary>
+                  <Component user={user} {...props} />
+                </ErrorBoundary>
+              </Suspense>
+            </Route>
+          ))}
+        </Switch>
+      </div>
       <ToastContainer />
     </RootContextProviders>
   </Router>

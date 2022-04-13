@@ -1,5 +1,5 @@
-import axios from "axios.js";
-import API_PATHS from "app/constants/apiPaths";
+import axios from "src/ea_oyster_components/axios.js";
+import API_PATHS from "src/ea_oyster_components/constants/apiPaths";
 
 const updatePassword = (passwordRequestBody) => {
   const requestBody = btoa(JSON.stringify(passwordRequestBody));

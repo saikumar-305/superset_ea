@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 import {
   Dialog,
@@ -8,16 +8,16 @@ import {
   DialogTitle,
   TextField,
   Button,
-} from "@material-ui/core";
-import * as yup from "yup";
-import C1InputField from "app/c1component/C1InputField";
-import { Formik, Field, Form, useFormik } from "formik";
-import { makeStyles } from "@material-ui/core/styles";
-import useRadioGroup from "./useRadioGroup";
+} from '@material-ui/core';
+import * as yup from 'yup';
+import C1InputField from 'src/ea_oyster_components/c1component/C1InputField';
+import { Formik, Field, Form, useFormik } from 'formik';
+import { makeStyles } from '@material-ui/core/styles';
+import useRadioGroup from './useRadioGroup';
 
 const validationSchema = yup.object({
-  userRating: yup.string("Enter your ratings").required("Rating is required"),
-  userComments: yup.string("Enter your comments"),
+  userRating: yup.string('Enter your ratings').required('Rating is required'),
+  userComments: yup.string('Enter your comments'),
 });
 
 const useFeedback = () => {
@@ -39,7 +39,7 @@ const useFeedback = () => {
 
   const formValues = {
     userRatings: null,
-    userComments: "",
+    userComments: '',
   };
 
   // const handleRatingsChange = (value) => (formValues.userRatings = value);
@@ -47,11 +47,11 @@ const useFeedback = () => {
   // Initialize the ratings radio group
   // eslint-disable-next-line no-unused-vars
   const [ratings, RatingsRadioGroup] = useRadioGroup(
-    "Ratings",
+    'Ratings',
     null,
-    ["Good", "Average", "Bad"],
+    ['Good', 'Average', 'Bad'],
     () => {},
-    true
+    true,
   );
 
   const feedbackDialog = () => {
@@ -90,7 +90,7 @@ const useFeedback = () => {
                 rows={4}
                 defaultValue=""
                 variant="outlined"
-                onChange={(event) =>
+                onChange={event =>
                   (formValues.userComments = event.target.value)
                 }
               />

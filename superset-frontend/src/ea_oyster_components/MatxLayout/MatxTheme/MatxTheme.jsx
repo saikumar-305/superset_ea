@@ -1,10 +1,10 @@
-import React from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { setLayoutSettings } from "app/redux/actions/LayoutActions";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import MatxCssVars from "./MatxCssVars";
+import React from 'react';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setLayoutSettings } from 'src/ea_oyster_components/redux/actions/LayoutActions';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MatxCssVars from './MatxCssVars';
 
 // import cssVars from "css-vars-ponyfill";
 
@@ -26,9 +26,9 @@ MatxTheme.propTypes = {
   settings: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   settings: state.layout.settings,
   setLayoutSettings: PropTypes.func.isRequired,
 });
 
-export default connect(mapStateToProps, { setLayoutSettings })(MatxTheme);
+export default connect(mapStateToProps, setLayoutSettings)(MatxTheme);
